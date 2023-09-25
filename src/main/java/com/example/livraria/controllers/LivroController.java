@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
+
 
 import com.example.livraria.dtos.LivroRecordDto;
 import com.example.livraria.models.LivroModel;
@@ -34,8 +35,8 @@ public class LivroController {
   }
 
   @GetMapping("{id}")
-  ResponseEntity<LivroModel> obterLivro(@PathParam("id") int idLivro) {
-    LivroModel livro = livroService.obterLivro(idLivro);
+  ResponseEntity<LivroModel> obterLivro(@PathVariable("id") int id) {
+    LivroModel livro = livroService.obterLivro(id);
     return ResponseEntity.ok().body(livro);
   }
 
@@ -47,7 +48,7 @@ public class LivroController {
 
   @DeleteMapping("{id}")
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
-  void deletarLivro(@PathParam("id") int idLivro) {
-    livroService.deletarLivro(idLivro);
+  void deletarLivro(@PathVariable("id") int id) {
+    livroService.deletarLivro(id);
   }
 }

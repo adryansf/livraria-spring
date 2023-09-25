@@ -5,7 +5,6 @@ import com.example.livraria.models.ClienteModel;
 import com.example.livraria.services.ClienteService;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 
 import java.util.List;
 
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +33,7 @@ public class ClienteController {
   }
 
   @GetMapping("{id}")
-  ResponseEntity<ClienteModel> obterCliente(@PathParam("id") int idCliente) {
+  ResponseEntity<ClienteModel> obterCliente(@PathVariable("id") int idCliente) {
     ClienteModel cliente = clienteService.obterCliente(idCliente);
     return ResponseEntity.ok().body(cliente);
   }
@@ -45,7 +45,7 @@ public class ClienteController {
   }
 
   @PatchMapping("{id}")
-  ResponseEntity<ClienteModel> atualizarCliente(@PathParam("id") int idCliente,
+  ResponseEntity<ClienteModel> atualizarCliente(@PathVariable("id") int idCliente,
       @RequestBody @Valid ClienteRecordDto clienteAtualizadoDto) {
     ClienteModel cliente = clienteService.atualizarCliente(idCliente, clienteAtualizadoDto);
     return ResponseEntity.ok().body(cliente);

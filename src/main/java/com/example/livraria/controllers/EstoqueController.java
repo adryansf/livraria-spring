@@ -5,10 +5,11 @@ import com.example.livraria.models.EstoqueModel;
 import com.example.livraria.services.EstoqueService;
 
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,14 +24,14 @@ public class EstoqueController {
   EstoqueService estoqueService;
 
   @PostMapping("{id}/entrada")
-  ResponseEntity<EstoqueModel> entradaEstoque(@PathParam("id") int idEstoque,
+  ResponseEntity<EstoqueModel> entradaEstoque(@PathVariable("id") int idEstoque,
       @RequestBody @Valid EstoqueRecordDto novoEstoqueDto) {
     EstoqueModel estoque = estoqueService.entradaEstoque(idEstoque, novoEstoqueDto);
     return ResponseEntity.ok().body(estoque);
   }
 
   @PostMapping("{id}/baixa")
-  ResponseEntity<EstoqueModel> baixaEstoque(@PathParam("id") int idEstoque,
+  ResponseEntity<EstoqueModel> baixaEstoque(@PathVariable("id") int idEstoque,
       @RequestBody @Valid EstoqueRecordDto novoEstoqueDto) {
     EstoqueModel estoque = estoqueService.baixaEstoque(idEstoque, novoEstoqueDto);
     return ResponseEntity.ok().body(estoque);
