@@ -3,7 +3,6 @@ package com.example.livraria.strategy;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.livraria.exception.NotFoundException;
