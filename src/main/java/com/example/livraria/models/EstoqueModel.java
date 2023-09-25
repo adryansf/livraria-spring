@@ -2,6 +2,8 @@ package com.example.livraria.models;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,5 +27,6 @@ public class EstoqueModel implements Serializable {
 
   @OneToOne()
   @JoinColumn(name = "idLivro", referencedColumnName = "id")
+  @JsonIgnoreProperties("estoque")
   private LivroModel livro;
 }

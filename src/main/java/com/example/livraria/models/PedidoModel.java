@@ -1,6 +1,8 @@
 package com.example.livraria.models;
 
 import com.example.livraria.enums.SituacaoPedidoEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -30,9 +33,11 @@ public class PedidoModel implements Serializable {
   private String codigoVendedor;
 
   @OneToMany(mappedBy = "pedido")
-  private Set<ItemModel> itens;
+  @JsonIgnoreProperties("pedido")
+  private List<ItemModel> itens;
 
   @ManyToOne
   @JoinColumn(name = "idCliente", nullable = false)
+  @JsonIgnoreProperties("pedidos")
   private ClienteModel cliente;
 }

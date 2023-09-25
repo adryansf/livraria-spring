@@ -2,6 +2,8 @@ package com.example.livraria.models;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,11 +27,12 @@ public class ItemModel implements Serializable {
   private int quantidade;
   private double subtotal;
 
-  @OneToOne()
-  @JoinColumn(name = "idLivro", referencedColumnName = "id")
+  @ManyToOne()
+  @JoinColumn(name = "idLivro",  nullable = false)
   private LivroModel livro;
 
   @ManyToOne
   @JoinColumn(name = "idPedido", nullable = false)
+  @JsonIgnoreProperties("itens")
   private PedidoModel pedido;
 }

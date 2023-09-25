@@ -1,5 +1,6 @@
 package com.example.livraria.services;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,13 @@ public class PedidoService {
   public PedidoModel obterPedido(int idPedido) {
     return pedidoRepository.findById(idPedido)
         .orElseThrow(() -> new NotFoundException("Pedido não encontrado!"));
+  }
+
+  public void obterItens(int idPedido) {
+    PedidoModel pedido = pedidoRepository.findById(idPedido)
+        .orElseThrow(() -> new NotFoundException("Pedido não encontrado!"));
+
+        pedido.getItens();
   }
 
   public PedidoModel iniciarPedido(PedidoRecordDto novoPedido) {

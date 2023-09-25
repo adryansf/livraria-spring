@@ -1,5 +1,8 @@
 package com.example.livraria.controllers;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.livraria.dtos.PedidoRecordDto;
+import com.example.livraria.models.ItemModel;
 import com.example.livraria.models.PedidoModel;
 import com.example.livraria.services.PedidoService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-
 
 @Tag(name = "Pedidos")
 @RestController
@@ -29,6 +32,7 @@ public class PedidoController {
     PedidoModel pedido = pedidoService.obterPedido(idPedido);
     return ResponseEntity.ok().body(pedido);
   }
+
 
   @PostMapping
   public ResponseEntity<PedidoModel> iniciarPedido(@RequestBody @Valid PedidoRecordDto novoPedido) {
