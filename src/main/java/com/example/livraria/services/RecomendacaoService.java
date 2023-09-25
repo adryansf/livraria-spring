@@ -19,12 +19,19 @@ public class RecomendacaoService {
   @Autowired
   LivroRepository livroRepository;
 
-  public List<LivroModel> recomendacaoPorAutor(int idCliente) {
+  public List<LivroModel> recomendar(int idCliente, String estrategia) {
     ClienteModel cliente = clienteRepository.findById(idCliente)
         .orElseThrow(() -> new NotFoundException("Cliente não encontrado!"));
 
-    List<LivroModel> livros = livroRepository.findAll();
-
-    return livros;
+    if ("PorAutor".equals(estrategia)) {
+      String autorFavorito = cliente.getAutorFavorito();
+      return livroRepository.findByAutor(autorFavorito);
+    } else if ("PorGenero".equals(estrategia)) {
+      String generoFavorito = cliente.getGeneroFavorito();
+      return livroRepository.findByGenero(generoFavorito);
+    } else {
+      throw new IllegalArgumentException("Estratégia de recomendação inválida: " + estrategia);
+    }
   }
+
 }
