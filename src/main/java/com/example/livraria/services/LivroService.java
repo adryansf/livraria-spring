@@ -38,11 +38,14 @@ public class LivroService {
 
     estoque.setLivro(livro);
     estoqueRepository.save(estoque);
+    livro.setEstoque(estoque);
 
     return livro;
   }
 
   public void deletarLivro(int idLivro) {
+    LivroModel livro=livroRepository.findById(idLivro).orElseThrow(() -> new NotFoundException("Livro não encontrado!"));
+    estoqueRepository.deleteById(livro.getEstoque().getId());
     livroRepository.deleteById(idLivro);
   }
 }

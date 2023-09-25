@@ -3,6 +3,7 @@ package com.example.livraria.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import com.example.livraria.services.PedidoService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
+
 
 @Tag(name = "Pedidos")
 @RestController
@@ -24,7 +25,7 @@ public class PedidoController {
   PedidoService pedidoService;
 
   @GetMapping("{id}")
-  public ResponseEntity<PedidoModel> obterPedido(@PathParam("id") int idPedido) {
+  public ResponseEntity<PedidoModel> obterPedido(@PathVariable("id") int idPedido) {
     PedidoModel pedido = pedidoService.obterPedido(idPedido);
     return ResponseEntity.ok().body(pedido);
   }
@@ -36,7 +37,7 @@ public class PedidoController {
   }
 
   @PostMapping("{id}")
-  public ResponseEntity<PedidoModel> finalizarPedido(@PathParam("id") int idPedido) {
+  public ResponseEntity<PedidoModel> finalizarPedido(@PathVariable("id") int idPedido) {
     PedidoModel pedido = pedidoService.finalizarPedido(idPedido);
     return ResponseEntity.ok().body(pedido);
   }
