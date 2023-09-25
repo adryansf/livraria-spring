@@ -1,12 +1,15 @@
 package com.example.livraria.models;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -31,4 +34,9 @@ public class LivroModel implements Serializable {
   @OneToOne(mappedBy = "livro")
   @JsonIgnoreProperties("livro")
   private EstoqueModel estoque;
+  
+  @OneToMany(mappedBy = "livro")
+  @JsonIgnore
+  private Set<ItemModel> itens;
+  
 }

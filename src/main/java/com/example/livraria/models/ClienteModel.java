@@ -3,6 +3,8 @@ package com.example.livraria.models;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,5 +33,6 @@ public class ClienteModel implements Serializable {
   private String autorFavorito;
 
   @OneToMany(mappedBy = "cliente")
+  @JsonIgnoreProperties("cliente")
   private Set<PedidoModel> pedidos;
 }
